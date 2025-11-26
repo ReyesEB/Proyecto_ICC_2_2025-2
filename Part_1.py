@@ -14,9 +14,7 @@ img_array = cv2.imread("dataset/9-img49.png",cv2.IMREAD_GRAYSCALE)
 
 nueva_imagen = cv2.resize(img_array,(8,8))
 
-for i in range(8):
-    for j in range(8):
-        nueva_imagen[i,j] = 255-nueva_imagen[i,j]
+nueva_imagen = 255 - nueva_imagen
 
 for i in range(8):
     for j in range(8):
