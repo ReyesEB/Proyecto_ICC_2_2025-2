@@ -32,6 +32,7 @@ for archivo in os.listdir(ruta): #archivo tiene la forma de: "num"-img"num".png
     for i in range(8):
         for j in range(8):
             nueva_imagen[i,j] = (nueva_imagen[i,j]/255)*16
+    print(ruta_completa)
     print(nueva_imagen)
 
     def distancia_euclidiana(a):
