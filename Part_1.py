@@ -5,12 +5,12 @@ import cv2
 # aves sin nido
 
 dataset=datasets.load_digits()
-print(dataset)
+
 target = dataset["target"]
 images = dataset["images"]
-print(images)
 
-img_array = cv2.imread("dataset/9-img49.png",cv2.IMREAD_GRAYSCALE)
+
+img_array = cv2.imread("los_numeros/9-img49.png", cv2.IMREAD_GRAYSCALE)
 
 nueva_imagen = cv2.resize(img_array,(8,8))
 
@@ -33,5 +33,3 @@ def distancia_euclidiana(a):
 
 print(distancia_euclidiana(nueva_imagen))
 
-dataframe = pd.DataFrame(target, columns=["Etiqueta/target"])
-print(dataframe)
