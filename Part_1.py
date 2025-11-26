@@ -10,7 +10,7 @@ target = dataset["target"]
 images = dataset["images"]
 print(images)
 
-img_array = cv2.imread("dataset/0-Img0.png",cv2.IMREAD_GRAYSCALE)
+img_array = cv2.imread("dataset/9-img49.png",cv2.IMREAD_GRAYSCALE)
 
 nueva_imagen = cv2.resize(img_array,(8,8))
 
@@ -21,6 +21,7 @@ for i in range(8):
 for i in range(8):
     for j in range(8):
         nueva_imagen[i,j] = (nueva_imagen[i,j]/255)*16
+print(nueva_imagen)
 
 def distancia_euclidiana(a):
     lista = []
