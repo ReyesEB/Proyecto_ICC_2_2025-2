@@ -1,14 +1,14 @@
-import numpy as np
-import pandas as pd
-from sklearn import datasets
-import cv2
-import os
+import numpy as np           # Importamos NumPy para manejo numérico
+import pandas as pd          # Importamos Pandas para crear el CSV
+from sklearn import datasets # Importamos datasets de sk-learn
+import cv2                   # Importamos OpenCV para procesar imágenes
+import os                    # Importamos OS para manejar rutas y archivos
 
 
-dataset=datasets.load_digits()
+dataset=datasets.load_digits() # Cargamos el dataset de dígitos (8x8) incluido en sklearn
 
-target = dataset["target"]
-images = dataset["images"]
+target = dataset["target"]     # Etiquetas del dataset
+images = dataset["images"]     # Imágenes del dataset
 
 # Ponemos la ruta en una variable para que la ubiquemos
 ruta = "los_numeros"
@@ -22,8 +22,8 @@ los_3_cercanos = []
 # Esto sera lo que la IA clasificara
 resultados_ia = []
 
-# Almacenara 0 y 1 dependiendo de como lo clasifico, porque habian 2 o mas repetidos o solo el mas cercano
-motivo_de_la_clasificacion = []
+# Almacenara 0 y 1 dependiendo de como lo clasifico.
+motivo_de_la_clasificacion = [] # 0 = solo el más cercano, 1 = al menos dos repetidos
 
 # Es el nombre del archivo leido, lo usaremos para hacer el csv con cada resultado
 archivo_leido = []
@@ -52,7 +52,7 @@ for archivo in os.listdir(ruta): #archivo tiene la forma de: "num"-img"num".png
     for i in range(8):
         for j in range(8):
             nueva_imagen[i,j] = (nueva_imagen[i,j]/255)*16
-    print('Ubicacion de la imagen :',ruta_completa)
+    print('Ubicacion de la imagen:',ruta_completa)
     print(nueva_imagen)
 
     # Funcion para el calculo de la distancia euclidiana
@@ -73,12 +73,12 @@ for archivo in os.listdir(ruta): #archivo tiene la forma de: "num"-img"num".png
         # Buscamos cual es el minimo indice encontrado en los 3 mas cercanos
         minimo = lista_euclidiana.index(min(lista_euclidiana))
 
-        # Guardamos el indice en la lista temporal
+        # Agregamos a la lista temporal el target detectado
         lista_temp.append(int(target[minimo]))
         print(f"La distancia {_+1} es {lista_euclidiana[minimo]}")
-        print(target[minimo])
+        print('Target detectado:',target[minimo])
         lista_euclidiana.remove(lista_euclidiana[minimo])
-        print(minimo)
+        print('El indice es:',minimo)
     los_3_cercanos.append(lista_temp)
 
     repetido = None
