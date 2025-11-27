@@ -63,9 +63,9 @@ for archivo in os.listdir(ruta):
     print(nueva_imagen)
 
     # Funcion para el calculo de la distancia euclidiana
-    def distancia_euclidiana(a):
+    def distancia_euclidiana(a) -> list[float]:
         lista = []                              # Aquí guardaremos las distancias
-        for i in range(1797): #esto debido a que "images" tiene 1797
+        for i in range(1797):                   # esto debido a que "images" tiene 1797
             suma=0
             suma += np.sum((images[i]-a)**2)
             distancia = suma ** 0.5
