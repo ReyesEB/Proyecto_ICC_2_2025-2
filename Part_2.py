@@ -14,4 +14,5 @@ numeros_predichos = [i for i in range(10)]
 Dataframe = pd.DataFrame(matriz,columns=numeros_predichos,index=numeros_predichos)
 print(Dataframe)
 
+print()
 Dataframe.to_csv("matriz_confusion_10_x_10.csv")
