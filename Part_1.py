@@ -70,7 +70,7 @@ for archivo in os.listdir(ruta):
             suma=0
             suma += np.sum((images[i]-a)**2)
             distancia = suma ** 0.5
-            distancia = float(distancia)
+            distancia = float(distancia)        # El float es porque distancia esta en np.float()
             lista.append(distancia)             # Guardamos la distancia
         return lista
 
@@ -85,7 +85,7 @@ for archivo in os.listdir(ruta):
         minimo = lista_euclidiana.index(min(lista_euclidiana))
 
         # Agregamos a la lista temporal el target minimo detectado
-        lista_temp.append(int(target[minimo]))
+        lista_temp.append(int(target[minimo]))  # int porque nos lo devuelve como np.int()
         print(f"La distancia {_+1} es {lista_euclidiana[minimo]}")
         print('Target detectado:',target[minimo])
 
