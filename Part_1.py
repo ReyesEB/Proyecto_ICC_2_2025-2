@@ -77,14 +77,14 @@ for archivo in os.listdir(ruta):
     # Calculamos todas las distancias con la imagen externa procesada
     lista_euclidiana = distancia_euclidiana(nueva_imagen)
 
-    # Lista temporal donde guardaremos los 3 vecinos más cercanos
+    # Lista temporal donde guardaremos los indices de los 3 vecinos más cercanos
     lista_temp = []
 
     for _ in range(3):
         # Buscamos cual es el minimo indice encontrado en los 3 mas cercanos
         minimo = lista_euclidiana.index(min(lista_euclidiana))
 
-        # Agregamos a la lista temporal el target detectado
+        # Agregamos a la lista temporal el indice minimo detectado
         lista_temp.append(int(target[minimo]))
         print(f"La distancia {_+1} es {lista_euclidiana[minimo]}")
         print('Target detectado:',target[minimo])
@@ -107,15 +107,21 @@ for archivo in os.listdir(ruta):
     # Si hay repetido ahi termina
     if repetido is not None:
         print("Soy la inteligencia artificial, y he detectado que el digito ingresado corresponde al numero:", repetido)
+
+        # Y lo agregamos a los resultado de IA
         resultados_ia.append(repetido)
-        motivo_de_la_clasificacion.append(1)# 1 porque lo detecto de porque se repetian minimo 2
+
+        motivo_de_la_clasificacion.append(1) # 1 porque lo detecto de porque se repetian minimo 2
 
     # Si no hubo repetidos, solo devolvemos el más cercano
     else:
         print("Soy la inteligencia artificial, como no detecto 2 o mas similares, regreso el elemento mas cercano:", lista_temp[0])
+
+        # Lo mismo
         resultados_ia.append(lista_temp[0])
-        motivo_de_la_clasificacion.append(0)# 0 porque ninguno se repetia mas de 2 veces
+
+        motivo_de_la_clasificacion.append(0) # 0 porque ninguno se repetia mas de 2 veces
     print("------------------------------------------------------------------------------------------------------------------------")
-resultado = np.column_stack((archivo_leido,valor_real, los_3_cercanos, resultados_ia, motivo_de_la_clasificacion))
+    resultado = np.column_stack((archivo_leido,valor_real, los_3_cercanos, resultados_ia, motivo_de_la_clasificacion))
 Dataframe = pd.DataFrame(resultado, columns=["Archivo","Valor real","Primer cercano","Segundo cercano","Tercer cercano","Clasificacion de la IA","Motivo de la clasificacion"])
 Dataframe.to_csv("resultados.csv",index=False)
