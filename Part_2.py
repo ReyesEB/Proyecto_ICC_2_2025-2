@@ -1,10 +1,12 @@
 import pandas as pd
 from sklearn.metrics import confusion_matrix
 
+# Importamos lo que queremos:
 dtf = pd.read_csv("resultados.csv")
 valores_reales = dtf['Valor real']
 valor_predicho = dtf['Clasificacion de la IA']
 
+#
 matriz = confusion_matrix(valores_reales, valor_predicho)
 print(matriz)
 

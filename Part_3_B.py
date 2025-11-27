@@ -1,5 +1,5 @@
 import pandas as pd
-import numpy as np
+
 
 Datos = pd.read_csv("resultados.csv")
 
