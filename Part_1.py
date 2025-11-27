@@ -84,7 +84,7 @@ for archivo in os.listdir(ruta):
         # Buscamos cual es el minimo indice encontrado en los 3 mas cercanos
         minimo = lista_euclidiana.index(min(lista_euclidiana))
 
-        # Agregamos a la lista temporal el indice minimo detectado
+        # Agregamos a la lista temporal el target minimo detectado
         lista_temp.append(int(target[minimo]))
         print(f"La distancia {_+1} es {lista_euclidiana[minimo]}")
         print('Target detectado:',target[minimo])
