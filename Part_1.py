@@ -11,7 +11,7 @@ target = dataset["target"]     # Etiquetas del dataset
 images = dataset["images"]     # Imágenes del dataset
 
 # Ponemos la ruta en una variable para que la ubiquemos
-ruta = "los_numeros"
+ruta = "los_numeros" # Archivo tiene la forma de: "num"-img"num".png
 
 # Almacenaremos los valores reales de los numeros
 valor_real = []
@@ -28,47 +28,58 @@ motivo_de_la_clasificacion = [] # 0 = solo el más cercano, 1 = al menos dos rep
 # Es el nombre del archivo leido, lo usaremos para hacer el csv con cada resultado
 archivo_leido = []
 
-# Esta es la parte de las IMAGENES
-for archivo in os.listdir(ruta): #archivo tiene la forma de: "num"-img"num".png
 
-    trans_cadena = str(archivo)
-    archivo_leido.append(archivo)
+# Esta es la parte de las IMAGENES
+for archivo in os.listdir(ruta):
+
+    trans_cadena = str(archivo)   # Convertimos el nombre del archivo a cadena
+    archivo_leido.append(archivo) # Guardamos el archivo en la lista
 
     # Cortamos la cadena con respecto al "-"
     split = trans_cadena.split("-")
 
-    # Vemos el valor real el cual se encuentra antes del "-"
+    # Vemos el valor real, el cual se encuentra antes del "-"
     valor_real.append(int(split[0]))
+
+    # No se xd
     ruta_completa = os.path.join(ruta, archivo)
+
+    # Abrimos la imagen en escala de grises
     img_array = cv2.imread(ruta_completa, cv2.IMREAD_GRAYSCALE)
 
+    # Redimensionamos la imagen a 8x8 igual que las del dataset original
     nueva_imagen = cv2.resize(img_array,(8,8))
 
     print('Numero real:',int(split[0]))
+
     # Invertimos la escala
     nueva_imagen = 255 - nueva_imagen
 
-    # Aplicamos el Martillaso, cambiando la escala a 0 - 16
+    # Aplicamos el Martillaso, cambiando la escala de 0-255 a 0 - 16
     for i in range(8):
         for j in range(8):
             nueva_imagen[i,j] = (nueva_imagen[i,j]/255)*16
+
     print('Ubicacion de la imagen:',ruta_completa)
     print(nueva_imagen)
 
     # Funcion para el calculo de la distancia euclidiana
     def distancia_euclidiana(a):
-        lista = []
+        lista = []                              # Aquí guardaremos las distancias
         for i in range(1797):
             suma=0
             suma += np.sum((images[i]-a)**2)
             distancia = suma ** 0.5
             distancia = float(distancia)
-            lista.append(distancia)
+            lista.append(distancia)             # Guardamos la distancia
         return lista
+
+    # Calculamos todas las distancias con la imagen externa procesada
     lista_euclidiana = distancia_euclidiana(nueva_imagen)
 
-
+    # Lista temporal donde guardaremos los 3 vecinos más cercanos
     lista_temp = []
+
     for _ in range(3):
         # Buscamos cual es el minimo indice encontrado en los 3 mas cercanos
         minimo = lista_euclidiana.index(min(lista_euclidiana))
@@ -77,20 +88,29 @@ for archivo in os.listdir(ruta): #archivo tiene la forma de: "num"-img"num".png
         lista_temp.append(int(target[minimo]))
         print(f"La distancia {_+1} es {lista_euclidiana[minimo]}")
         print('Target detectado:',target[minimo])
+
+        # Eliminamos esa distancia de la lista para no repetirla
         lista_euclidiana.remove(lista_euclidiana[minimo])
+
         print('El indice es:',minimo)
+
+    # Guardamos los 3 más cercanos
     los_3_cercanos.append(lista_temp)
 
     repetido = None
 
+    # Buscamos si hay algún elemento repetido al menos dos veces
     for elemento in lista_temp:
         if lista_temp.count(elemento) > 1:
             repetido = elemento  # solo se guarda, no se corta el ciclo
 
+    # Si hay repetido ahi termina
     if repetido is not None:
         print("Soy la inteligencia artificial, y he detectado que el digito ingresado corresponde al numero:", repetido)
         resultados_ia.append(repetido)
         motivo_de_la_clasificacion.append(1)# 1 porque lo detecto de porque se repetian minimo 2
+
+    # Si no hubo repetidos, solo devolvemos el más cercano
     else:
         print("Soy la inteligencia artificial, como no detecto 2 o mas similares, regreso el elemento mas cercano:", lista_temp[0])
         resultados_ia.append(lista_temp[0])
