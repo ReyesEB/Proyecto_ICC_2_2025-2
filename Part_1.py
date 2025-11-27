@@ -28,7 +28,6 @@ motivo_de_la_clasificacion = [] # 0 = solo el más cercano, 1 = al menos dos rep
 # Es el nombre del archivo leido, lo usaremos para hacer el csv con cada resultado
 archivo_leido = []
 
-
 # Leemos las Imagenes
 for archivo in os.listdir(ruta):
 
