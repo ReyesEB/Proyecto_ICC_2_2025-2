@@ -1,26 +1,15 @@
+import pandas as pd
+from sklearn.metrics import confusion_matrix
 
+dtf = pd.read_csv("resultados.csv")
+valores_reales = dtf['Valor real']
+valor_predicho = dtf['Clasificacion de la IA']
 
-# EJEMPLO GPT
-from sklearn.neighbors import KNeighborsClassifier
+matriz = confusion_matrix(valores_reales, valor_predicho)
+print(matriz)
 
-# Datos de ejemplo (características)
-X = [
-    [1, 2],
-    [2, 3],
-    [3, 1],
-    [6, 7],
-    [7, 8],
-    [8, 6]
-]
+numeros_predichos = [i for i in range(10)]
+Dataframe = pd.DataFrame(matriz,columns=numeros_predichos,index=numeros_predichos)
+print(Dataframe)
 
-# Etiquetas de esos datos
-y = ['A', 'A', 'A', 'B', 'B', 'B']
-
-# Creamos el modelo con K=3
-modelo = KNeighborsClassifier(n_neighbors=3)
-
-# Entrenamos
-modelo.fit(X, y)
-
-# Predecimos para un punto nuevo
-print(modelo.predict([[4, 3]]))
+Dataframe.to_csv("matriz_confusion_10_x_10.csv")

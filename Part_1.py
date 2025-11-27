@@ -95,7 +95,7 @@ for archivo in os.listdir(ruta): #archivo tiene la forma de: "num"-img"num".png
         print("Soy la inteligencia artificial, como no detecto 2 o mas similares, regreso el elemento mas cercano:", lista_temp[0])
         resultados_ia.append(lista_temp[0])
         motivo_de_la_clasificacion.append(0)# 0 porque ninguno se repetia mas de 2 veces
-
+print("------------------------------------------------------------------------------------------------------------------------")
 resultado = np.column_stack((archivo_leido,valor_real, los_3_cercanos, resultados_ia, motivo_de_la_clasificacion))
 Dataframe = pd.DataFrame(resultado, columns=["Archivo","Valor real","Primer cercano","Segundo cercano","Tercer cercano","Clasificacion de la IA","Motivo de la clasificacion"])
 Dataframe.to_csv("resultados.csv",index=False)
