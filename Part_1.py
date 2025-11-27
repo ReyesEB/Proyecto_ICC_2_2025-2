@@ -10,8 +10,8 @@ dataset=datasets.load_digits() # Cargamos el dataset de dígitos (8x8) incluido 
 target = dataset["target"]     # Etiquetas del dataset
 images = dataset["images"]     # Imágenes del dataset
 
-# Ponemos la ruta en una variable para que la ubiquemos
-ruta = "los_numeros" # Archivo tiene la forma de: "num"-img"num".png
+# Ponemos la ruta del archivo de las imagenes
+ruta = "los_numeros"
 
 # Almacenaremos los valores reales de los numeros
 valor_real = []
@@ -36,7 +36,7 @@ for archivo in os.listdir(ruta):
     archivo_leido.append(archivo) # Guardamos el archivo en la lista
 
     # Cortamos la cadena con respecto al "-"
-    split = trans_cadena.split("-")
+    split = trans_cadena.split("-") # Las fotos tienen la forma de: "num"-img"num".png
 
     # Vemos el valor real, el cual se encuentra antes del "-"
     valor_real.append(int(split[0]))
