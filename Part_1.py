@@ -41,7 +41,7 @@ for archivo in os.listdir(ruta):
     # Vemos el valor real, el cual se encuentra antes del "-"
     valor_real.append(int(split[0]))
 
-    # No se xd
+    #  En estya variable almacenamos la ruta completa del archivo
     ruta_completa = os.path.join(ruta, archivo)
 
     # Abrimos la imagen en escala de grises
