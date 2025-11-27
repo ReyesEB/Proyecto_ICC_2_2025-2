@@ -1,4 +1,4 @@
-import numpy as np           # Importamos NumPy para manejo numérico
+import numpy as np           # Importamos NumPy para manejo numérico(array)
 import pandas as pd          # Importamos Pandas para crear el CSV
 from sklearn import datasets # Importamos datasets de sk-learn
 import cv2                   # Importamos OpenCV para procesar imágenes
@@ -7,8 +7,8 @@ import os                    # Importamos OS para manejar rutas y archivos
 
 dataset=datasets.load_digits() # Cargamos el dataset de dígitos (8x8) incluido en sklearn
 
-target = dataset["target"]     # Etiquetas del dataset
-images = dataset["images"]     # Imágenes del dataset
+target = dataset["target"]
+images = dataset["images"]
 
 # Ponemos la ruta del archivo de las imagenes
 ruta = "los_numeros"
@@ -29,7 +29,7 @@ motivo_de_la_clasificacion = [] # 0 = solo el más cercano, 1 = al menos dos rep
 archivo_leido = []
 
 
-# Esta es la parte de las IMAGENES
+# Leemos las Imagenes
 for archivo in os.listdir(ruta):
 
     trans_cadena = str(archivo)   # Convertimos el nombre del archivo a cadena
